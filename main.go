@@ -17,7 +17,7 @@ func main() {
 
 	doc := httpdoc.Doc{RootDir: "./_docs"}
 
-	if code, err := doc.GetCode(os.Args[1]); err != nil {
+	if code, err := doc.GetStatusCode(os.Args[1]); err != nil {
 		fmt.Fprintf(os.Stderr, "ERROR: %s\n", err)
 		os.Exit(1)
 	} else {

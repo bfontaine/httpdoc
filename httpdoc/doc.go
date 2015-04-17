@@ -7,7 +7,9 @@ import (
 	"github.com/bfontaine/httpdoc/Godeps/_workspace/src/gopkg.in/yaml.v2"
 )
 
+// Doc represents a documentation source
 type Doc struct {
+	// the root dir in which are the documentation files
 	RootDir string
 }
 
