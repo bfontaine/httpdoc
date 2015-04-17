@@ -1,6 +1,12 @@
 package httpdoc
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+	"strings"
+
+	"github.com/kr/text"
+)
 
 // A StatusCode is an HTTP status code
 type StatusCode struct {
@@ -50,4 +56,18 @@ func (d Doc) GetStatusCode(code string) (c StatusCode, err error) {
 	c.Code = code
 
 	return
+}
+
+func (c StatusCode) String() string {
+	return fmt.Sprintf("%s %s", c.Code, c.Text)
+}
+
+// PrettyString returns a string describing the status code with a long
+// description and a references list.
+func (c StatusCode) PrettyString() string {
+	return fmt.Sprintf("%s %s\n\n%s\n\nReferences:\n * %s\n",
+		c.Code, c.Text,
+		text.Wrap(c.Desc, 75),
+		strings.Join(c.Refs, "\n * "),
+	)
 }
