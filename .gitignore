@@ -1,0 +1,4 @@
+*~
+*.tgz
+.*.sw*
+.DS_Store
