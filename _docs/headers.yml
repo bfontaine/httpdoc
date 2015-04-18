@@ -1,5 +1,7 @@
 # main sources:
 #    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
+#    - http://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+#    - https://msdn.microsoft.com/en-us/library/ie/cc288325(v=vs.85).aspx#SetMode
 "Accept":
   type: request
   desc: |
@@ -151,4 +153,65 @@
     requested.
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8
+"Cache-Control":
+  type: both
+  desc: |
+    The Cache-Control general-header field is used to specify directives that
+    must be obeyed by all caching mechanisms along the request/response chain.
+    The directives specify behavior intended to prevent caches from adversely
+    interfering with the request or response. They typically override the
+    default caching algorithms. Cache directives are unidirectional in that the
+    presence of a directive in a request does not imply that the same directive
+    is to be given in the response.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+"Connection":
+  type: both
+  desc: |
+    The Connection general-header field allows the sender to specify options
+    that are desired for that particular connection and must not be
+    communicated by proxies over further connections.
+
+    HTTP/1.1 defines the "close" connection option for the sender to signal
+    that the connection will be closed after completion of the response. For
+    example,
+
+        Connection: close
+
+    in either the request or the response header fields indicates that the
+    connection should not be considered "persistent" after the current
+    request/response is complete.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.10
+"Content-Encoding":
+  type: response
+  desc: |
+    The Content-Encoding entity-header field is used as a modifier to the
+    media-type. When present, its value indicates what additional content
+    codings have been applied to the entity-body, and thus what decoding
+    mechanisms must be applied in order to obtain the media-type referenced by
+    the Content-Type header field. Content-Encoding is primarily used to allow
+    a document to be compressed without losing the identity of its underlying
+    media type.
+
+    For example:
+
+        Content-Encoding: gzip
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
+
 # TODO
+
+"X-UA-Compatible":
+  type: response
+  desc: |
+    Recommends the preferred rendering engine (often a backward-compatibility
+    mode) to use to display the content. Also used to activate Chrome Frame in
+    Internet Explorer. (non-standard field)
+
+    Example:
+
+      X-UA-Compatible: IE=EmulateIE7
+  refs:
+    - https://msdn.microsoft.com/en-us/library/ie/cc288325(v=vs.85).aspx#SetMode
+    - http://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Common_non-standard_response_fields
