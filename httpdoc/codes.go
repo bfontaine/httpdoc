@@ -4,8 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"strings"
-
-	"github.com/kr/text"
 )
 
 // A StatusCode is an HTTP status code
@@ -67,7 +65,7 @@ func (c StatusCode) String() string {
 func (c StatusCode) PrettyString() string {
 	return fmt.Sprintf("%s %s\n\n%s\n\nReferences:\n * %s\n",
 		c.Code, c.Text,
-		text.Wrap(c.Desc, 75),
+		c.Desc,
 		strings.Join(c.Refs, "\n * "),
 	)
 }
