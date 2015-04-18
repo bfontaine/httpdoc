@@ -199,6 +199,149 @@
         Content-Encoding: gzip
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
+"Content-Language":
+  type: response
+  desc: |
+    The Content-Language header field describes the natural language(s)
+    of the intended audience for the enclosed entity. Note that this might not
+    be equivalent to all the languages used within the entity-body.
+
+    The primary purpose of Content-Language is to allow a user to identify and
+    differentiate entities according to the user's own preferred language.
+    Thus, if the body content is intended only for a Danish-literate audience,
+    the appropriate field is
+
+        Content-Language: da
+
+    If no Content-Language is specified, the default is that the content is
+    intended for all language audiences. This might mean that the sender does
+    not consider it to be specific to any natural language, or that the sender
+    does not know for which language it is intended.
+
+    Multiple languages MAY be listed for content that is intended for multiple
+    audiences. For example, a rendition of the "Treaty of Waitangi," presented
+    simultaneously in the original Maori and English versions, would call for
+
+       Content-Language: mi, en
+
+    However, just because multiple languages are present within an entity does
+    not mean that it is intended for multiple linguistic audiences. An example
+    would be a beginner's language primer, such as "A First Lesson in Latin,"
+    which is clearly intended to be used by an English-literate audience. In
+    this case, the Content-Language would properly only include "en".
+
+    Content-Language MAY be applied to any media type – it is not limited to
+    textual documents.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.12
+"Content-Length":
+  type: both
+  desc: |
+    The Content-Length header field indicates the size of the body, in decimal
+    number of octets, sent to the recipient or, in the case of the HEAD method,
+    the size of the body that would have been sent had the request been a GET.
+
+    An example is
+
+       Content-Length: 3495
+
+    Applications should use this field to indicate the transfer-length of the
+    message-body.
+
+    Any Content-Length greater than or equal to zero is a valid value.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
+"Content-Location":
+  type: response
+  desc: |
+    The Content-Location entity-header field may be used to supply the resource
+    location for the entity enclosed in the message when that entity is
+    accessible from a location separate from the requested resource's URI. A
+    server should provide a Content-Location for the variant corresponding to
+    the response entity; especially in the case where a resource has multiple
+    entities associated with it, and those entities actually have separate
+    locations by which they might be individually accessed, the server should
+    provide a Content-Location for the particular variant which is returned.
+
+    The value of Content-Location also defines the base URI for the entity.
+
+    The Content-Location value is not a replacement for the original requested
+    URI; it is only a statement of the location of the resource corresponding
+    to this particular entity at the time of the request. Future requests may
+    specify the Content-Location URI as the URI if the desire is to identify
+    the source of that particular entity.
+
+    The meaning of the Content-Location header in PUT or POST requests is
+    undefined; servers are free to ignore it in those cases.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.14
+"Content-MD5":
+  type: both
+  desc: |
+    The Content-MD5 header field is an MD5 digest of the entity-body for the
+    purpose of providing an end-to-end message integrity check (MIC) of the
+    body.
+
+    The MD5 digest is computed based on the content of the entity-body,
+    including any content-coding that has been applied, but not including any
+    transfer-encoding applied to the message-body. If the message is received
+    with a transfer-encoding, that encoding must be removed prior to checking
+    the Content-MD5 value against the received entity.
+
+    This has the result that the digest is computed on the octets of the
+    entity-body exactly as, and in the order that, they would be sent if no
+    transfer-encoding were being applied.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.15
+"Content-Range":
+  type: response
+  desc: |
+    The Content-Range entity-header is sent with a partial entity-body to
+    specify where in the full entity-body the partial body should be applied.
+
+    The header SHOULD indicate the total length of the full entity-body, unless
+    this length is unknown or difficult to determine. The asterisk "*"
+    character means that the instance-length is unknown at the time when the
+    response was generated.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16
+"Content-Type":
+  type: both
+  desc: |
+    The Content-Type entity-header field indicates the media type of the
+    entity-body sent to the recipient or, in the case of the HEAD method, the
+    media type that would have been sent had the request been a GET.
+
+    For example:
+
+        Content-Type: text/html; charset=ISO-8859-4
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+"Date":
+  type: both
+  desc: |
+    The Date general-header field represents the date and time at which the
+    message was originated.
+
+    For example:
+
+        Date: Tue, 15 Nov 1994 08:12:31 GMT
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.18
+"ETag":
+  type: response
+  desc: |
+    The ETag response-header field provides the current value of the entity tag
+    for the requested variant. The entity tag may be used for comparison with
+    other entities from the same resource.
+
+    Examples:
+
+        ETag: "xyzzy"
+        ETag: W/"xyzzy"
+        ETag: ""
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19
 
 # TODO
 

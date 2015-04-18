@@ -36,7 +36,7 @@ This tool is a work in progress.
 | Resources                    | Support |
 |------------------------------|:-------:|
 | Standard status codes        | ✔       |
-| Standard header fields       | 11/47   |
+| Standard header fields       | 19/47   |
 | Standard methods             | 0/8     |
 
 ## See Also
