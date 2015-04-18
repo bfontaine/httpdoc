@@ -23,3 +23,9 @@ doc := httpdoc.DefaultDoc
 code, _ := doc.GetStatusCode("200")
 fmt.Println(code.PrettyString())
 ```
+
+## See Also
+
+* [`rfc`][rfc-cli]: read RFCs in your terminal
+
+[rfc-cli]: https://github.com/bfontaine/rfc#rfc
