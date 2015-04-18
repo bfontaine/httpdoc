@@ -1,11 +1,16 @@
 # httpdoc
 
-**httpdoc** gives you direct access to some HTTP documentation straight from
+**httpdoc** gives you direct access to HTTP documentation straight from
 your terminal.
 
 ## Usage
 
     httpdoc <something>
+
+### Examples
+
+    $ httpdoc 200           # => Doc about the status code
+    $ httpdoc content-type  # => Doc about the header field
 
 ## Install
 
@@ -23,6 +28,16 @@ doc := httpdoc.DefaultDoc
 code, _ := doc.GetStatusCode("200")
 fmt.Println(code.PrettyString())
 ```
+
+## Support
+
+This tool is a work in progress.
+
+| Resources                    | Support |
+|------------------------------|:-------:|
+| Standard status codes        | ✔       |
+| Standard header fields       | 11/47   |
+| Standard methods             | 0/8     |
 
 ## See Also
 
