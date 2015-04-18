@@ -1,6 +1,7 @@
 package httpdoc
 
 import (
+	"go/build"
 	"io/ioutil"
 	"log"
 	"path/filepath"
@@ -15,6 +16,8 @@ type Doc struct {
 	RootDir string
 }
 
+var DefaultDoc Doc
+
 func (d Doc) loadSource(filename string, target interface{}) (err error) {
 	var data []byte
 
@@ -28,6 +31,13 @@ func (d Doc) loadSource(filename string, target interface{}) (err error) {
 	return yaml.Unmarshal(data, target)
 }
 
+func defaultDocDir() string {
+	gopath := build.Default.GOPATH
+
+	return filepath.Join(gopath, "src",
+		"github.com", "bfontaine", "httpdoc", "_docs")
+}
+
 var (
 	statusCodeRe *regexp.Regexp
 )
@@ -35,6 +45,10 @@ var (
 func init() {
 	var err error
 
+	// set the default doc
+	DefaultDoc = Doc{RootDir: defaultDocDir()}
+
+	// compile regular expressions
 	statusCodeRe, err = regexp.Compile(`^[12345]\d{2}$`)
 	if err != nil {
 		log.Fatalf("ERROR: %v", err)
