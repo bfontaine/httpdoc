@@ -37,6 +37,8 @@ func (d Doc) GetHeader(name string) (h Header, err error) {
 		return
 	}
 
+	name = strings.Title(strings.ToLower(name))
+
 	h, ok := headers[name]
 	if !ok {
 		err = ErrUnknownHeader
