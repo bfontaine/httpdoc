@@ -3,9 +3,7 @@ package httpdoc
 import (
 	"go/build"
 	"io/ioutil"
-	"log"
 	"path/filepath"
-	"regexp"
 
 	"github.com/bfontaine/httpdoc/Godeps/_workspace/src/gopkg.in/yaml.v2"
 )
@@ -38,29 +36,17 @@ func defaultDocDir() string {
 		"github.com", "bfontaine", "httpdoc", "_docs")
 }
 
-var (
-	statusCodeRe *regexp.Regexp
-)
-
 func init() {
-	var err error
-
 	// set the default doc
 	DefaultDoc = Doc{RootDir: defaultDocDir()}
-
-	// compile regular expressions
-	statusCodeRe, err = regexp.Compile(`^[12345]\d{2}$`)
-	if err != nil {
-		log.Fatalf("ERROR: %v", err)
-	}
 }
 
 // GetResourceFor gets a name and tries to find a corresponding resource. It'll
 // return ErrUnknownResource if it can’t find it.
 func (d Doc) GetResourceFor(name string) (Resource, error) {
-	if statusCodeRe.MatchString(name) {
-		return d.GetStatusCode(name)
+	if name == "" {
+		return InvalidResource, ErrUnknownResource
 	}
 
-	return InvalidResource, ErrUnknownResource
+	return d.GetStatusCode(name)
 }
