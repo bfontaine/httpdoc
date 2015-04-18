@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/bfontaine/httpdoc/httpdoc"
 )
@@ -14,19 +15,32 @@ func printUsage() {
 	flag.PrintDefaults()
 }
 
+func defaultDocDir() string {
+	gopath := os.Getenv("GOPATH")
+
+	return filepath.Join(gopath, "src",
+		"github.com", "bfontaine", "httpdoc", "_docs")
+}
+
 func main() {
 	var doc httpdoc.Doc
 
-	flag.StringVar(&doc.RootDir, "root-dir", "./_docs",
+	flag.StringVar(&doc.RootDir, "root-dir", "",
 		"Documentation root directory")
 	flag.Parse()
 
-	if len(os.Args) != 2 {
+	args := flag.Args()
+
+	if len(args) != 1 {
 		printUsage()
 		os.Exit(1)
 	}
 
-	if code, err := doc.GetStatusCode(os.Args[1]); err != nil {
+	if doc.RootDir == "" {
+		doc.RootDir = defaultDocDir()
+	}
+
+	if code, err := doc.GetStatusCode(args[0]); err != nil {
 		fmt.Fprintf(os.Stderr, "ERROR: %s\n", err)
 		os.Exit(1)
 	} else {
