@@ -1,0 +1,154 @@
+# main sources:
+#    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
+"Accept":
+  type: request
+  desc: |
+    The Accept request-header field can be used to specify certain media types
+    which are acceptable for the response. Accept headers can be used to
+    indicate that the request is specifically limited to a small set of desired
+    types, as in the case of a request for an in-line image.
+
+    The asterisk "*" character is used to group media types into ranges, with
+    "*/*" indicating all media types and "type/*" indicating all subtypes of
+    that type. The media-range MAY include media type parameters that are
+    applicable to that range.
+
+    Each media-range MAY be followed by one or more accept-params, beginning
+    with the "q" parameter for indicating a relative quality factor. The first
+    "q" parameter (if any) separates the media-range parameter(s) from the
+    accept-params. Quality factors allow the user to indicate the relative
+    degree of preference for that media-range, using the qvalue scale from 0 to
+    1. The default value is q=1.
+
+    Example:
+      Accept: text/plain; q=0.5, text/html, text/x-dvi; q=0.8, text/x-c
+
+    Verbally, this would be interpreted as "text/html and text/x-c are the
+    preferred media types, but if they do not exist, then send the text/x-dvi
+    entity, and if that does not exist, send the text/plain entity."
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
+"Accept-Charset":
+  type: request
+  desc: |
+    The Accept-Charset request header field can be used to indicate what
+    character sets are acceptable for the response. This field allows clients
+    capable of understanding more comprehensive or special-purpose character
+    sets to signal that capability to a server which is capable of representing
+    documents in those character sets.
+
+    Each charset MAY be given an associated quality value which represents the
+    user's preference for that charset. The default value is q=1. For example:
+
+      Accept-Charset: iso-8859-5, unicode-1-1;q=0.8
+
+    The special value "*", if present in the Accept-Charset field, matches
+    every character set (including ISO-8859-1) which is not mentioned elsewhere
+    in the Accept-Charset field. If no "*" is present in an Accept-Charset
+    field, then all character sets not explicitly mentioned get a quality value
+    of 0, except for ISO-8859-1, which gets a quality value of 1 if not
+    explicitly mentioned.
+
+    If no Accept-Charset header is present, the default is that any character
+    set is acceptable. If an Accept-Charset header is present, and if the
+    server cannot send a response which is acceptable according to the
+    Accept-Charset header, then the server SHOULD send an error response with
+    the 406 (not acceptable) status code, though the sending of an unacceptable
+    response is also allowed.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.2
+"Accept-Encoding":
+  type: request
+  desc: |
+    The Accept-Encoding request-header field is similar to Accept, but
+    restricts the content-codings that are acceptable in the response.
+
+    Examples of its use are:
+
+       Accept-Encoding: compress, gzip
+       Accept-Encoding:
+       Accept-Encoding: *
+       Accept-Encoding: compress;q=0.5, gzip;q=1.0
+       Accept-Encoding: gzip;q=1.0, identity; q=0.5, *;q=0
+
+    If an Accept-Encoding field is present in a request, and if the server
+    cannot send a response which is acceptable according to the Accept-Encoding
+    header, then the server should send an error response with the 406 (Not
+    Acceptable) status code.
+
+    If no Accept-Encoding field is present in a request, the server may assume
+    that the client will accept any content coding. In this case, if "identity"
+    is one of the available content-codings, then the server should use the
+    "identity" content-coding, unless it has additional information that a
+    different content-coding is meaningful to the client.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.3
+"Accept-Language":
+  type: request
+  desc: |
+    The Accept-Language request-header field is similar to Accept, but
+    restricts the set of natural languages that are preferred as a response to
+    the request.
+
+    Each language-range may be given an associated quality value which
+    represents an estimate of the user's preference for the languages specified
+    by that range. The quality value defaults to "q=1". For example,
+
+        Accept-Language: da, en-gb;q=0.8, en;q=0.7
+
+    would mean: "I prefer Danish, but will accept British English and other
+    types of English."
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
+"Accept-Ranges":
+  type: response
+  desc: |
+    The Accept-Ranges header field allows the server to indicate its acceptance
+    of range requests for a resource.
+
+    Servers that accept byte-range requests may send
+
+        Accept-Ranges: bytes
+
+    but are not required to do so. Servers that do not accept any kind of range
+    request for a resource may send
+
+        Accept-Ranges: none
+
+    to advise the client not to attempt a range request.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.5
+"Age":
+  type: response
+  desc: |
+    The Age response-header field conveys the sender's estimate of the amount
+    of time since the response (or its revalidation) was generated at the
+    origin server.
+    Age values are non-negative decimal integers, representing time in seconds.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.6
+"Allow":
+  type: response
+  desc: |
+    The Allow entity-header field lists the set of methods supported by the
+    resource identified by the Request-URI. The purpose of this field is
+    strictly to inform the recipient of valid methods associated with the
+    resource. An Allow header field MUST be present in a 405 (Method Not
+    Allowed) response.
+
+    Example of use:
+        Allow: GET, HEAD, PUT
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.7
+"Authorization":
+  type: request
+  desc: |
+    A user agent that wishes to authenticate itself with a server– usually, but
+    not necessarily, after receiving a 401 response– does so by including an
+    Authorization request-header field with the request. The Authorization
+    field value consists of credentials containing the authentication
+    information of the user agent for the realm of the resource being
+    requested.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.8
+# TODO

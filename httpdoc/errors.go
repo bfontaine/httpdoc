@@ -10,4 +10,8 @@ var (
 	// ErrUnknownStatusCode is returned by GetStatusCode if it can’t find a
 	// status code
 	ErrUnknownStatusCode = errors.New("Unknown status code")
+
+	// ErrUnknownHeader is returned by GetHeader if it can’t find an header
+	// field
+	ErrUnknownHeader = errors.New("Unknown header field")
 )

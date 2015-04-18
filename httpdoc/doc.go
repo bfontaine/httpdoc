@@ -48,5 +48,10 @@ func (d Doc) GetResourceFor(name string) (Resource, error) {
 		return InvalidResource, ErrUnknownResource
 	}
 
-	return d.GetStatusCode(name)
+	// simple heuristic
+	if name[0] >= '0' && name[0] <= '9' {
+		return d.GetStatusCode(name)
+	}
+
+	return d.GetHeader(name)
 }

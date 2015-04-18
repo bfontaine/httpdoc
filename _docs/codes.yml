@@ -1,4 +1,9 @@
-# source: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+# main sources:
+#  - http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+#  - https://tools.ietf.org/html/rfc7538#section-3
+#  - http://moz.com/learn/seo/http-status-codes
+#  - https://support.google.com/webmasters/answer/40132?hl=en
+#  - https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection
 "100":
   text: Continue
   desc: |
