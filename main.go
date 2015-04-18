@@ -41,10 +41,10 @@ func main() {
 		doc.RootDir = defaultDocDir()
 	}
 
-	if code, err := doc.GetStatusCode(args[0]); err != nil {
+	if res, err := doc.GetResourceFor(args[0]); err != nil {
 		fmt.Fprintf(os.Stderr, "ERROR: %s\n", err)
 		os.Exit(1)
 	} else {
-		fmt.Printf("%s\n", code.PrettyString())
+		fmt.Printf("%s\n", res.PrettyString())
 	}
 }

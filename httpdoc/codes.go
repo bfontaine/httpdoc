@@ -1,7 +1,6 @@
 package httpdoc
 
 import (
-	"errors"
 	"fmt"
 	"strings"
 )
@@ -23,12 +22,6 @@ type StatusCode struct {
 
 const (
 	codesSource = "codes.yml"
-)
-
-var (
-	// ErrUnknownStatusCode is returned by GetStatusCode if it can’t find a
-	// status code
-	ErrUnknownStatusCode = errors.New("Unknown status code")
 )
 
 func (d Doc) parseStatusCodes() (m map[string]StatusCode, err error) {
