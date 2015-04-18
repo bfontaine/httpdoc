@@ -322,6 +322,16 @@
     conditions under which the request was issued.
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.8
+"308":
+  text: Permanent Redirect
+  desc: >
+    The request, and all future requests should be repeated using another URI.
+    It parallels the behaviour of 301, but doesn’t allow the HTTP method to
+    change. So, for example, submitting a form to a permanently redirected
+    resource may continue smoothly.
+  refs:
+    - https://tools.ietf.org/html/rfc7538#section-3
+    - http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection
 "400":
   text: Bad Request
   desc: >
@@ -547,6 +557,91 @@
     evidence that the request could not be met by the next-hop server.
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.18
+"418":
+  text: I'm a teapot
+  desc: >
+    This code was defined in 1998 as one of the traditional IETF April Fools'
+    jokes, in RFC 2324, and is not expected to be implemented by actual HTTP
+    servers. The RFC specifies this code should be returned by tea pots
+    requested to brew coffee.
+  refs:
+    - https://www.ietf.org/rfc/rfc2324.txt
+    - http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error
+"419":
+  text: Authentication Timeout
+  desc: >
+    Not a part of the HTTP standard, 419 Authentication Timeout denotes that
+    previously valid authentication has expired. It is used as an alternative
+    to 401 Unauthorized in order to differentiate from otherwise authenticated
+    clients being denied access to specific server resources.
+  refs:
+    - http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error
+"420":
+  text: Method Failure
+  desc: >
+    Not part of the HTTP standard, but defined by Spring in the HttpStatus
+    class to be used when a method failed. This status code is deprecated by
+    Spring.
+
+    It is also returned by version 1 of the Twitter Search and Trends API when
+    the client is being rate limited. Other services may wish to implement the
+    429 Too Many Requests response code instead.
+  refs:
+    - http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error
+"422":
+  text: Unprocessable Entity
+  desc: >
+    The request was well-formed but was unable to be followed due to semantic
+    errors. (extension for WebDAV)
+  refs:
+    - https://tools.ietf.org/html/rfc4918#section-11.2
+    - http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error
+"423":
+  text: Locked
+  desc: >
+    The 423 (Locked) status code means the source or destination resource of a
+    method is locked.  This response SHOULD contain an appropriate precondition
+    or postcondition code, such as 'lock-token-submitted' or
+    'no-conflicting-lock'. (extension for WebDAV)
+  refs:
+    - https://tools.ietf.org/html/rfc4918#section-11.3
+"426":
+  text: Upgrade Required
+  desc: >
+    The client should switch to a different protocol such as TLS/1.0, given in
+    the Upgrade header field.
+  refs:
+    - http://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error
+"428":
+  text: Precondition Required
+  desc: >
+    The 428 status code indicates that the origin server requires the request
+    to be conditional.
+
+    Its typical use is to avoid the "lost update" problem, where a client GETs
+    a resource's state, modifies it, and PUTs it back to the server, when
+    meanwhile a third party has modified the state on the server, leading to a
+    conflict.  By requiring requests to be conditional, the server can assure
+    that clients are working with the correct copies.
+
+    Responses using this status code SHOULD explain how to resubmit the request
+    successfully. For example:
+
+      HTTP/1.1 428 Precondition Required
+      Content-Type: text/html
+
+      <html>
+         <head>
+            <title>Precondition Required</title>
+         </head>
+         <body>
+            <h1>Precondition Required</h1>
+            <p>This request is required to be conditional;
+            try using "If-Match".</p>
+         </body>
+      </html>
+  refs:
+    - http://tools.ietf.org/html/rfc6585#section-3
 "500":
   text: Internal Server Error
   desc: >
