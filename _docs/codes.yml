@@ -210,7 +210,7 @@
   desc: |
     The requested resource resides temporarily under a different URI. Since
     the redirection might be altered on occasion, the client should continue
-    to use the Request-URI for future requests. This response is only
+    to use the URI for future requests. This response is only
     cacheable if indicated by a Cache-Control or Expires header field.
 
     The temporary URI should be given by the Location field in the response.
@@ -222,6 +222,11 @@
     unless it can be confirmed by the user, since this might change the
     conditions under which the request was issued.
 
+    This code is similar to a 301 in that for a GET or HEAD request, it
+    automatically forwards the requestor to a different location, but you
+    shouldn't use it to tell the Googlebot that a page or site has moved
+    because Googlebot will continue to crawl and index the original location.
+
     Note: RFC 1945 and RFC 2068 specify that the client is not allowed to
       change the method on the redirected request.  However, most existing
       user agent implementations treat 302 as if it were a 303 response,
@@ -230,6 +235,7 @@
       servers that wish to make unambiguously clear which kind of reaction is
       expected of the client.
   refs:
+    - https://support.google.com/webmasters/answer/40132?hl=en
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.3
 "303":
   text: See Other
@@ -302,7 +308,7 @@
   desc: |
     The requested resource resides temporarily under a different URI. Since
     the redirection may be altered on occasion, the client should continue to
-    use the Request-URI for future requests. This response is only cacheable
+    use the URI for future requests. This response is only cacheable
     if indicated by a Cache-Control or Expires header field.
 
     The temporary URI should be given by the Location field in the response.
@@ -371,7 +377,7 @@
 "404":
   text: Not Found
   desc: |
-    The server has not found anything matching the Request-URI. No indication
+    The server has not found anything matching the URI. No indication
     is given of whether the condition is temporary or permanent. The 410
     (Gone) status code should be used if the server knows, through some
     internally configurable mechanism, that an old resource is permanently
@@ -383,9 +389,9 @@
 "405":
   text: Method Not Allowed
   desc: |
-    The method specified in the Request-Line is not allowed for the resource
-    identified by the Request-URI. The response must include an Allow header
-    containing a list of valid methods for the requested resource.
+    The method specified is not allowed for the resource identified by the URI.
+    The response must include an Allow header containing a list of valid
+    methods for the requested resource.
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6
 "406":
@@ -460,7 +466,7 @@
     The requested resource is no longer available at the server and no
     forwarding address is known. This condition is expected to be considered
     permanent. Clients with link editing capabilities should delete
-    references to the Request-URI after user approval. If the server does not
+    references to the URI after user approval. If the server does not
     know, or has no facility to determine, whether or not the condition is
     permanent, the status code 404 (Not Found) should be used instead. This
     response is cacheable unless indicated otherwise.
@@ -509,7 +515,7 @@
 "414":
   text: Request-URI Too Long
   desc: |
-    The server is refusing to service the request because the Request-URI is
+    The server is refusing to service the request because the URI is
     longer than the server is willing to interpret. This rare condition is
     only likely to occur when a client has improperly converted a POST
     request to a GET request with long query information, when the client has
@@ -517,7 +523,7 @@
     prefix that points to a suffix of itself), or when the server is under
     attack by a client attempting to exploit security holes present in some
     servers using fixed-length buffers for reading or manipulating the
-    Request-URI.
+    URI.
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.15
 "415":
