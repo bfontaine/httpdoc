@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"go/build"
 	"os"
 	"path/filepath"
 
@@ -16,7 +17,7 @@ func printUsage() {
 }
 
 func defaultDocDir() string {
-	gopath := os.Getenv("GOPATH")
+	gopath := build.Default.GOPATH
 
 	return filepath.Join(gopath, "src",
 		"github.com", "bfontaine", "httpdoc", "_docs")
