@@ -7,7 +7,7 @@ import (
 
 // Header is an HTTP header field
 type Header struct {
-	// Type is either "request" or "response"
+	// Type is either "request", "response", or "both"
 	Type string
 
 	// Text is the header’s text
@@ -54,9 +54,14 @@ func (h Header) String() string {
 }
 
 func (h Header) PrettyString() string {
+	t := h.Type
+	if t == "both" {
+		t = "request and response"
+	}
+
 	return fmt.Sprintf("%s (%s field)\n\n%s\n\nReferences:\n * %s\n",
 		h.Text,
-		h.Type,
+		t,
 		h.Desc,
 		strings.Join(h.Refs, "\n * "),
 	)
