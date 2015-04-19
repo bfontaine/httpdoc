@@ -5,17 +5,17 @@
 "Accept":
   type: request
   desc: |
-    The Accept header field can be used to specify certain media types
-    which are acceptable for the response. Accept headers can be used to
-    indicate that the request is specifically limited to a small set of desired
-    types, as in the case of a request for an in-line image.
+    The Accept header field can be used to specify certain media types which
+    are acceptable for the response. Accept headers can be used to indicate
+    that the request is specifically limited to a small set of desired types,
+    as in the case of a request for an in-line image.
 
     The asterisk "*" character is used to group media types into ranges, with
     "*/*" indicating all media types and "type/*" indicating all subtypes of
-    that type. The media-range MAY include media type parameters that are
+    that type. The media-range may include media type parameters that are
     applicable to that range.
 
-    Each media-range MAY be followed by one or more accept-params, beginning
+    Each media-range may be followed by one or more accept-params, beginning
     with the "q" parameter for indicating a relative quality factor. The first
     "q" parameter (if any) separates the media-range parameter(s) from the
     accept-params. Quality factors allow the user to indicate the relative
@@ -33,13 +33,13 @@
 "Accept-Charset":
   type: request
   desc: |
-    The Accept-Charset header field can be used to indicate what
-    character sets are acceptable for the response. This field allows clients
-    capable of understanding more comprehensive or special-purpose character
-    sets to signal that capability to a server which is capable of representing
+    The Accept-Charset header field can be used to indicate what character sets
+    are acceptable for the response. This field allows clients capable of
+    understanding more comprehensive or special-purpose character sets to
+    signal that capability to a server which is capable of representing
     documents in those character sets.
 
-    Each charset MAY be given an associated quality value which represents the
+    Each charset may be given an associated quality value which represents the
     user's preference for that charset. The default value is q=1. For example:
 
       Accept-Charset: iso-8859-5, unicode-1-1;q=0.8
@@ -54,7 +54,7 @@
     If no Accept-Charset header is present, the default is that any character
     set is acceptable. If an Accept-Charset header is present, and if the
     server cannot send a response which is acceptable according to the
-    Accept-Charset header, then the server SHOULD send an error response with
+    Accept-Charset header, then the server should send an error response with
     the 406 (not acceptable) status code, though the sending of an unacceptable
     response is also allowed.
   refs:
@@ -62,8 +62,8 @@
 "Accept-Encoding":
   type: request
   desc: |
-    The Accept-Encoding header field is similar to Accept, but
-    restricts the content-codings that are acceptable in the response.
+    The Accept-Encoding header field is similar to Accept, but restricts the
+    content-codings that are acceptable in the response.
 
     Examples of its use are:
 
@@ -88,9 +88,8 @@
 "Accept-Language":
   type: request
   desc: |
-    The Accept-Language header field is similar to Accept, but
-    restricts the set of natural languages that are preferred as a response to
-    the request.
+    The Accept-Language header field is similar to Accept, but restricts the
+    set of natural languages that are preferred as a response to the request.
 
     Each language-range may be given an associated quality value which
     represents an estimate of the user's preference for the languages specified
@@ -123,20 +122,19 @@
 "Age":
   type: response
   desc: |
-    The Age header field conveys the sender's estimate of the amount
-    of time since the response (or its revalidation) was generated at the
-    origin server.
+    The Age header field conveys the sender's estimate of the amount of time
+    since the response (or its revalidation) was generated at the origin
+    server.
     Age values are non-negative decimal integers, representing time in seconds.
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.6
 "Allow":
   type: response
   desc: |
-    The Allow header field lists the set of methods supported by the
-    resource identified by the Request-URI. The purpose of this field is
-    strictly to inform the recipient of valid methods associated with the
-    resource. An Allow header field MUST be present in a 405 (Method Not
-    Allowed) response.
+    The Allow header field lists the set of methods supported by the resource
+    identified by the Request-URI. The purpose of this field is strictly to
+    inform the recipient of valid methods associated with the resource. An
+    Allow header field MUST be present in a 405 (Method Not Allowed) response.
 
     Example of use:
         Allow: GET, HEAD, PUT
@@ -156,9 +154,9 @@
 "Cache-Control":
   type: both
   desc: |
-    The Cache-Control header field is used to specify directives that
-    must be obeyed by all caching mechanisms along the request/response chain.
-    The directives specify behavior intended to prevent caches from adversely
+    The Cache-Control header field is used to specify directives that must be
+    obeyed by all caching mechanisms along the request/response chain. The
+    directives specify behavior intended to prevent caches from adversely
     interfering with the request or response. They typically override the
     default caching algorithms. Cache directives are unidirectional in that the
     presence of a directive in a request doesn’t imply that the same directive
@@ -168,9 +166,9 @@
 "Connection":
   type: both
   desc: |
-    The Connection header field allows the sender to specify options
-    that are desired for that particular connection and must not be
-    communicated by proxies over further connections.
+    The Connection header field allows the sender to specify options that are
+    desired for that particular connection and must not be communicated by
+    proxies over further connections.
 
     HTTP/1.1 defines the "close" connection option for the sender to signal
     that the connection will be closed after completion of the response. For
@@ -186,13 +184,12 @@
 "Content-Encoding":
   type: response
   desc: |
-    The Content-Encoding header field is used as a modifier to the
-    media-type. When present, its value indicates what additional content
-    codings have been applied to the entity-body, and thus what decoding
-    mechanisms must be applied in order to obtain the media-type referenced by
-    the Content-Type header field. Content-Encoding is primarily used to allow
-    a document to be compressed without losing the identity of its underlying
-    media type.
+    The Content-Encoding header field is used as a modifier to the media-type.
+    When present, its value indicates what additional content codings have been
+    applied to the body, and thus what decoding mechanisms must be applied in
+    order to obtain the media-type referenced by the Content-Type header field.
+    Content-Encoding is primarily used to allow a document to be compressed
+    without losing the identity of its underlying media type.
 
     For example:
 
@@ -202,14 +199,14 @@
 "Content-Language":
   type: response
   desc: |
-    The Content-Language header field describes the natural language(s)
-    of the intended audience for the enclosed entity. Note that this might not
-    be equivalent to all the languages used within the entity-body.
+    The Content-Language header field describes the natural language(s) of the
+    intended audience for the enclosed entity. Note that this might not be
+    equivalent to all the languages used within the body.
 
     The primary purpose of Content-Language is to allow a user to identify and
     differentiate entities according to the user's own preferred language.
     Thus, if the body content is intended only for a Danish-literate audience,
-    the appropriate field is
+    the appropriate field is:
 
         Content-Language: da
 
@@ -218,7 +215,7 @@
     not consider it to be specific to any natural language, or that the sender
     doesn’t know for which language it is intended.
 
-    Multiple languages MAY be listed for content that is intended for multiple
+    Multiple languages may be listed for content that is intended for multiple
     audiences. For example, a rendition of the "Treaty of Waitangi," presented
     simultaneously in the original Maori and English versions, would call for
 
@@ -230,7 +227,7 @@
     which is clearly intended to be used by an English-literate audience. In
     this case, the Content-Language would properly only include "en".
 
-    Content-Language MAY be applied to any media type – it is not limited to
+    Content-Language may be applied to any media type – it is not limited to
     textual documents.
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.12
@@ -246,7 +243,7 @@
        Content-Length: 3495
 
     Applications should use this field to indicate the transfer-length of the
-    message-body.
+    body.
 
     Any Content-Length greater than or equal to zero is a valid value.
   refs:
@@ -278,39 +275,38 @@
 "Content-MD5":
   type: both
   desc: |
-    The Content-MD5 header field is an MD5 digest of the entity-body for the
-    purpose of providing an end-to-end message integrity check (MIC) of the
-    body.
+    The Content-MD5 header field is an MD5 digest of the body for the purpose
+    of providing an end-to-end message integrity check (MIC) of the body.
 
-    The MD5 digest is computed based on the content of the entity-body,
-    including any content-coding that has been applied, but not including any
-    transfer-encoding applied to the message-body. If the message is received
-    with a transfer-encoding, that encoding must be removed prior to checking
-    the Content-MD5 value against the received entity.
+    The MD5 digest is computed based on the content of the body, including any
+    content-coding that has been applied, but not including any
+    transfer-encoding applied to the body. If the message is received with a
+    transfer-encoding, that encoding must be removed prior to checking the
+    Content-MD5 value against the received entity.
 
     This has the result that the digest is computed on the octets of the
-    entity-body exactly as, and in the order that, they would be sent if no
+    body exactly as, and in the order that, they would be sent if no
     transfer-encoding were being applied.
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.15
 "Content-Range":
   type: response
   desc: |
-    The Content-Range entity-header is sent with a partial entity-body to
-    specify where in the full entity-body the partial body should be applied.
+    The Content-Range entity-header is sent with a partial body to specify
+    where in the full body the partial body should be applied.
 
-    The header SHOULD indicate the total length of the full entity-body, unless
-    this length is unknown or difficult to determine. The asterisk "*"
-    character means that the instance-length is unknown at the time when the
-    response was generated.
+    The header should indicate the total length of the full body, unless this
+    length is unknown or difficult to determine. The asterisk "*" character
+    means that the instance-length is unknown at the time when the response was
+    generated.
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.16
 "Content-Type":
   type: both
   desc: |
-    The Content-Type entity-header field indicates the media type of the
-    entity-body sent to the recipient or, in the case of the HEAD method, the
-    media type that would have been sent had the request been a GET.
+    The Content-Type entity-header field indicates the media type of the body
+    sent to the recipient or, in the case of the HEAD method, the media type
+    that would have been sent had the request been a GET.
 
     For example:
 
@@ -488,7 +484,7 @@
     Range header with a conditional GET (using either or both of
     If-Unmodified-Since and If-Match). However, if the condition fails because
     the entity has been modified, the client would then have to make a second
-    request to obtain the entire current entity-body.
+    request to obtain the entire current body.
 
     The If-Range header allows a client to "short-circuit" the second request.
     Informally, its meaning is "if the entity is unchanged, send me the part(s)
