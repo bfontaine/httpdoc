@@ -342,6 +342,182 @@
         ETag: ""
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19
+"Expect":
+  type: request
+  desc: |
+    The Expect header field is used to indicate that particular server
+    behaviors are required by the client.
+
+    Example:
+
+        Expect: 100-continue
+  refs: |
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.20
+"Expires":
+  type: response
+  desc: |
+    The Expires entity-header field gives the date/time after which the
+    response is considered stale. A stale cache entry may not normally be
+    returned by a cache (either a proxy cache or a user agent cache) unless it
+    is first validated with the origin server (or with an intermediate cache
+    that has a fresh copy of the entity).
+
+    The presence of an Expires field does not imply that the original resource
+    will change or cease to exist at, before, or after that time.
+
+    An example of its use is
+
+        Expires: Thu, 01 Dec 1994 16:00:00 GMT
+
+    Note: if a response includes a Cache-Control field with the max-age
+      directive, that directive overrides the Expires field.
+
+    HTTP/1.1 clients and caches must treat other invalid date formats,
+    especially including the value "0", as in the past (i.e., "already
+    expired").
+
+    To mark a response as "already expired," a server sends an Expires date
+    that is equal to the Date header value.
+
+    To mark a response as "never expires," a server sends an Expires date
+    approximately one year from the time the response is sent. HTTP/1.1 servers
+    should not send Expires dates more than one year in the future.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
+"From":
+  type: request
+  desc: |
+    The From request-header field, if given, should contain an e-mail
+    address for the human user who controls the requesting user agent. The
+    address should be machine-usable.
+
+    An example is:
+
+       From: webmaster@w3.org
+
+    This header field may be used for logging purposes and as a means for
+    identifying the source of invalid or unwanted requests. It should not be
+    used as an insecure form of access protection. The interpretation of this
+    field is that the request is being performed on behalf of the person given,
+    who accepts responsibility for the method performed. In particular, robot
+    agents SHOULD include this header so that the person responsible for
+    running the robot can be contacted if problems occur on the receiving end.
+
+    The Internet e-mail address in this field may be separate from the Internet
+    host which issued the request. For example, when a request is passed
+    through a proxy the original issuer's address should be used.
+
+    The client should not send the From header field without the user's
+    approval, as it might conflict with the user's privacy interests or their
+    site's security policy. It is strongly recommended that the user be able to
+    disable, enable, and modify the value of this field at any time prior to a
+    request.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.22
+"Host":
+  type: request
+  desc: |
+    The Host header field specifies the Internet host and port number
+    of the resource being requested, as obtained from the original URI given by
+    the user or referring resource. The Host field value musT represent the
+    naming authority of the origin server or gateway given by the original URL.
+    This allows the origin server or gateway to differentiate between
+    internally-ambiguous URLs, such as the root "/" URL of a server for
+    multiple host names on a single IP address.
+
+    A "host" without any trailing port information implies the default port for
+    the service requested (e.g., "80" for an HTTP URL). For example, a request
+    on the origin server for http://www.w3.org/pub/WWW/ would properly include:
+
+       GET /pub/WWW/ HTTP/1.1
+       Host: www.w3.org
+
+    A client must include a Host header field in all HTTP/1.1 request messages.
+    If the requested URI doesn’t include an host name for the service being
+    requested, the Host header field must be given with an empty value. All
+    HTTP/1.1 servers must respond with a 400 (Bad Request) status code to any
+    HTTP/1.1 request message which lacks a Host header field.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.23
+"If-Match":
+  type: request
+  desc: |
+    The If-Match header field is used with a method to make it conditional.
+
+    Example:
+
+        If-Match: "xyzzy"
+        If-Match: "xyzzy", "r2d2xxxx", "c3piozzzz"
+        If-Match: *
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.24
+"If-Modified-Since":
+  type: request
+  desc: |
+    The If-Modified-Since request-header field is used with a method to make it
+    conditional: if the requested variant has not been modified since the time
+    specified in this field, an entity will not be returned from the server;
+    instead, a 304 (not modified) response will be returned without any
+    message-body.
+
+    An example of the field is:
+
+        If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.25
+"If-None-Match":
+  type: request
+  desc: |
+    The If-None-Match header field is used with a method to make it
+    conditional.
+
+    Examples:
+
+        If-None-Match: "xyzzy"
+        If-None-Match: W/"xyzzy"
+        If-None-Match: "xyzzy", "r2d2xxxx", "c3piozzzz"
+        If-None-Match: W/"xyzzy", W/"r2d2xxxx", W/"c3piozzzz"
+        If-None-Match: *
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.26
+"If-Range":
+  type: request
+  desc: |
+    If a client has a partial copy of an entity in its cache, and wishes to
+    have an up-to-date copy of the entire entity in its cache, it could use the
+    Range header with a conditional GET (using either or both of
+    If-Unmodified-Since and If-Match). However, if the condition fails because
+    the entity has been modified, the client would then have to make a second
+    request to obtain the entire current entity-body.
+
+    The If-Range header allows a client to "short-circuit" the second request.
+    Informally, its meaning is "if the entity is unchanged, send me the part(s)
+    that I am missing; otherwise, send me the entire new entity".
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.27
+"If-Unmodified-Since":
+  type: request
+  desc: |
+    The If-Unmodified-Since header field is used with a method to make it
+    conditional. If the requested resource has not been modified since the time
+    specified in this field, the server should perform the requested operation
+    as if the If-Unmodified-Since header were not present.
+
+    If the requested variant has been modified since the specified time, the
+    server must not perform the requested operation, and must return a 412
+    (Precondition Failed).
+
+    An example of the field is:
+
+        If-Unmodified-Since: Sat, 29 Oct 1994 19:43:31 GMT
+
+    If the request normally (i.e., without the If-Unmodified-Since header)
+    would result in anything other than a 2xx or 412 status, the
+    If-Unmodified-Since header SHOULD be ignored.
+
+    If the specified date is invalid, the header is ignored.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.28
 
 # TODO
 
