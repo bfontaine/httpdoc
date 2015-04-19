@@ -27,7 +27,7 @@
 
     Verbally, this would be interpreted as "text/html and text/x-c are the
     preferred media types, but if they do not exist, then send the text/x-dvi
-    entity, and if that does not exist, send the text/plain entity."
+    entity, and if that doesn’t exist, send the text/plain entity."
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
 "Accept-Charset":
@@ -161,7 +161,7 @@
     The directives specify behavior intended to prevent caches from adversely
     interfering with the request or response. They typically override the
     default caching algorithms. Cache directives are unidirectional in that the
-    presence of a directive in a request does not imply that the same directive
+    presence of a directive in a request doesn’t imply that the same directive
     is to be given in the response.
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
@@ -216,7 +216,7 @@
     If no Content-Language is specified, the default is that the content is
     intended for all language audiences. This might mean that the sender does
     not consider it to be specific to any natural language, or that the sender
-    does not know for which language it is intended.
+    doesn’t know for which language it is intended.
 
     Multiple languages MAY be listed for content that is intended for multiple
     audiences. For example, a rendition of the "Treaty of Waitangi," presented
@@ -362,7 +362,7 @@
     is first validated with the origin server (or with an intermediate cache
     that has a fresh copy of the entity).
 
-    The presence of an Expires field does not imply that the original resource
+    The presence of an Expires field doesn’t imply that the original resource
     will change or cease to exist at, before, or after that time.
 
     An example of its use is
