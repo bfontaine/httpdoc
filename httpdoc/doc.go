@@ -16,6 +16,8 @@ type Doc struct {
 	RootDir string
 }
 
+// DefaultDoc is a Doc which assumes you installed the binary/library using
+// `go get`.
 var DefaultDoc Doc
 
 func (d Doc) loadSource(filename string, target interface{}) (err error) {

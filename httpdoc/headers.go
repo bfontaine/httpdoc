@@ -31,6 +31,7 @@ func (d Doc) parseHeaders() (m map[string]Header, err error) {
 	return m, err
 }
 
+// GetHeader returns a Header
 func (d Doc) GetHeader(name string) (h Header, err error) {
 	headers, err := d.parseHeaders()
 	if err != nil {
@@ -53,6 +54,7 @@ func (h Header) String() string {
 	return h.Text
 }
 
+// PrettyString returns an human-readable description of the header
 func (h Header) PrettyString() string {
 	t := h.Type
 	if t == "both" {

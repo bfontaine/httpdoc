@@ -51,6 +51,7 @@ func (m Method) String() string {
 	return m.Verb
 }
 
+// PrettyString returns an human-readable description of this method
 func (m Method) PrettyString() string {
 	return fmt.Sprintf("%s\n\n%s\n\nReferences:\n * %s\n",
 		m.Verb,
