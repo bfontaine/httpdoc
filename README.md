@@ -19,6 +19,8 @@ your terminal.
 
     go get github.com/bfontaine/httpdoc
 
+`httpdoc` requires Go 1.2+.
+
 ## Go API
 
 ```go
