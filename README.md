@@ -37,7 +37,7 @@ This tool is a work in progress.
 |------------------------------|:-------:|
 | Standard status codes        | ✔       |
 | Standard header fields       | ✔       |
-| Standard methods             | 0/8     |
+| Standard methods             | ✔       |
 
 ## See Also
 
