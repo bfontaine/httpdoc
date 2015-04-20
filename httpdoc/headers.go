@@ -38,7 +38,12 @@ func (d Doc) GetHeader(name string) (h Header, err error) {
 		return
 	}
 
-	name = strings.Title(strings.ToLower(name))
+	// normalize the name
+	if len(name) > 2 {
+		name = strings.Title(strings.ToLower(name))
+	} else {
+		name = strings.ToUpper(name)
+	}
 
 	h, ok := headers[name]
 	if !ok {
