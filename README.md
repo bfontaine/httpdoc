@@ -3,6 +3,9 @@
 **httpdoc** gives you direct access to HTTP documentation straight from
 your terminal.
 
+[![GoDoc](https://godoc.org/github.com/bfontaine/httpdoc?status.svg)](https://godoc.org/github.com/bfontaine/httpdoc)
+[![Build Status](https://travis-ci.org/bfontaine/httpdoc.svg?branch=master)](https://travis-ci.org/bfontaine/httpdoc)
+
 ## Usage
 
     httpdoc <something>
