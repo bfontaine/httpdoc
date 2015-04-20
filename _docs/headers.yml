@@ -587,8 +587,274 @@
     value decremented by one (1).
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.31
+"Pragma":
+  type: both
+  desc: |
+    The Pragma header field is used to include implementation-specific
+    directives that might apply to any recipient along the request/response
+    chain. All pragma directives specify optional behavior from the viewpoint
+    of the protocol; however, some systems may require that behavior be
+    consistent with the directives.
 
-# TODO
+    When the no-cache directive is present in a request, an application should
+    forward the request toward the origin server even if it has a cached copy
+    of what is being requested. This pragma directive has the same semantics as
+    the no-cache directive and is defined here for backward compatibility with
+    HTTP/1.0. Clients should include both header fields when a no-cache request
+    is sent to a server not known to be HTTP/1.1 compliant.
+
+    Pragma directives must be passed through by a proxy or gateway application,
+    regardless of their significance to that application, since the directives
+    might be applicable to all recipients along the request/response chain. It
+    is not possible to specify a pragma for a specific recipient.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32
+"Proxy-Authenticate":
+  type: response
+  desc: |
+    The Proxy-Authenticate response-header field must be included as part of a
+    407 (Proxy Authentication Required) response. The field value consists of a
+    challenge that indicates the authentication scheme and parameters
+    applicable to the proxy for this URI.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.33
+"Proxy-Authorization":
+  type: request
+  desc: |
+    The Proxy-Authorization header field allows the client to identify itself
+    to a proxy which requires authentication. The Proxy-Authorization field
+    value consists of credentials containing the authentication information of
+    the user agent for the proxy and/or realm of the resource being requested.
+
+    When multiple proxies are used in a chain, the Proxy-Authorization header
+    field is consumed by the first outbound proxy that was expecting to receive
+    credentials.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.34
+"Range":
+  type: request
+  desc: |
+    Request only part of an entity. Bytes are numbered from 0.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+"Referer":
+  type: request
+  desc: |
+    The Referer (sic) header field allows the client to specify, for the
+    server's benefit, the address of the resource from which the URI was
+    obtained (the "referrer", although the header field is misspelled). The
+    Referer request-header allows a server to generate lists of back-links to
+    resources for interest, logging, optimized caching, etc. It also allows
+    obsolete or mistyped links to be traced for maintenance. The Referer field
+    must not be sent if the URI was obtained from a source that does not have
+    its own URI, such as input from the user keyboard.
+
+    Example:
+
+        Referer: http://www.w3.org/hypertext/DataSources/Overview.html
+
+    Note:
+      The word “referrer” has been misspelled in the RFC as well as in most
+      implementations to the point that it has become standard usage and is
+      considered correct terminology.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.36
+"Retry-After":
+  type: response
+  desc: |
+    The Retry-After header field can be used with a 503 (Service Unavailable)
+    response to indicate how long the service is expected to be unavailable to
+    the requesting client. This field may also be used with any 3xx
+    (Redirection) response to indicate the minimum time the user-agent is asked
+    to wait before issuing the redirected request. The value of this field can
+    be either an HTTP-date or an integer number of seconds (in decimal) after
+    the time of the response.
+
+    Two examples of its use are
+
+      Retry-After: Fri, 31 Dec 1999 23:59:59 GMT
+      Retry-After: 120
+
+    In the latter example, the delay is 2 minutes.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.37
+"Server":
+  type: response
+  desc: |
+    The Server header field contains information about the software used by the
+    origin server to handle the request. The field can contain multiple product
+    tokens and comments identifying the server and any significant subproducts.
+    The product tokens are listed in order of their significance for
+    identifying the application.
+
+    Example:
+
+        Server: CERN/3.0 libwww/2.17
+
+    If the response is being forwarded through a proxy, the proxy application
+    must not modify the Server response-header. Instead, it should include a
+    Via field.
+
+    Note: Revealing the specific software version of the server might allow the
+      server machine to become more vulnerable to attacks against software that
+      is known to contain security holes. Server implementors are encouraged to
+      make this field a configurable option.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.38
+"TE":
+  type: request
+  desc: |
+    The TE header field indicates what extension transfer-codings it is willing
+    to accept in the response and whether or not it is willing to accept
+    trailer fields in a chunked transfer-coding. Its value may consist of the
+    keyword "trailers" and/or a comma-separated list of extension
+    transfer-coding names with optional accept parameters.
+
+    The presence of the keyword "trailers" indicates that the client is willing
+    to accept trailer fields in a chunked transfer-coding. This keyword is
+    reserved for use with transfer-coding values even though it does not itself
+    represent a transfer-coding.
+
+    Examples of its use are:
+
+        TE: deflate
+        TE:
+        TE: trailers, deflate;q=0.5
+
+    The TE header field only applies to the immediate connection. If the TE
+    field-value is empty or if no TE field is present, the only transfer-coding
+    is "chunked". A message with no transfer-coding is always acceptable.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.39
+"Trailer":
+  type: response
+  desc: |
+    The Trailer general field value indicates that the given set of header
+    fields is present in the trailer of a message encoded with chunked
+    transfer-coding.
+
+    An HTTP/1.1 message should include a Trailer header field in a message
+    using chunked transfer-coding with a non-empty trailer. Doing so allows the
+    recipient to know which header fields to expect in the trailer.
+
+    If no Trailer header field is present, the trailer shouldn’t include any
+    header fields.
+
+    Header fields listed in the Trailer header field must not include the
+    following header fields:
+
+      - Transfer-Encoding
+      - Content-Length
+      - Trailer
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.40
+"Transfer-Encoding":
+  type: response
+  desc: |
+    The Transfer-Encoding header field indicates what (if any) type of
+    transformation has been applied to the message body in order to safely
+    transfer it between the sender and the recipient. This differs from the
+    content-coding in that the transfer-coding is a property of the message,
+    not of the entity.
+
+    An example is:
+
+        Transfer-Encoding: chunked
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.41
+"Upgrade":
+  type: response
+  desc: |
+    The Upgrade header allows the client to specify what additional
+    communication protocols it supports and would like to use if the server
+    finds it appropriate to switch protocols. The server must use the Upgrade
+    header field within a 101 (Switching Protocols) response to indicate which
+    protocol(s) are being switched.
+
+    For example,
+
+        Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11
+
+    The Upgrade header field is intended to provide a simple mechanism for
+    transition from HTTP/1.1 to some other, incompatible protocol. It does so
+    by allowing the client to advertise its desire to use another protocol,
+    such as a later version of HTTP with a higher major version number, even
+    though the current request has been made using HTTP/1.1. This eases the
+    difficult transition between incompatible protocols by allowing the client
+    to initiate a request in the more commonly supported protocol while
+    indicating to the server that it would like to use a "better" protocol if
+    available (where "better" is determined by the server, possibly according
+    to the nature of the method and/or resource being requested).
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.42
+"User-Agent":
+  type: request
+  desc: |
+    The User-Agent header field contains information about the user agent
+    originating the request. This is for statistical purposes, the tracing of
+    protocol violations, and automated recognition of user agents for the sake
+    of tailoring responses to avoid particular user agent limitations. User
+    agents SHOULD include this field with requests. The field can contain
+    multiple product tokens and comments identifying the agent and any
+    subproducts which form a significant part of the user agent. By convention,
+    the product tokens are listed in order of their significance for
+    identifying the application.
+
+    Example:
+
+        User-Agent: CERN-LineMode/2.15 libwww/2.17b3
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.43
+"Vary":
+  type: response
+  desc: |
+    The Vary field value indicates the set of header fields that fully
+    determines, while the response is fresh, whether a cache is permitted to
+    use the response to reply to a subsequent request without revalidation. For
+    uncacheable or stale responses, the Vary field value advises the user agent
+    about the criteria that were used to select the representation. A Vary
+    field value of "*" implies that a cache cannot determine from the request
+    headers of a subsequent request whether this response is the appropriate
+    representation.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.44
+"Via":
+  type: response
+  desc: |
+    The Via header field must be used by gateways and proxies to indicate the
+    intermediate protocols and recipients between the user agent and the server
+    on requests, and between the origin server and the client on responses. It
+    is intended to be used for tracking message forwards, avoiding request
+    loops, and identifying the protocol capabilities of all senders along the
+    request/response chain.
+
+    Example:
+
+        Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.45
+"Warning":
+  type: both
+  desc: |
+    The Warning header field is used to carry additional information about the
+    status or transformation of a message which might not be reflected in the
+    message. This information is typically used to warn about a possible lack
+    of semantic transparency from caching operations or transformations applied
+    to the body of the message.
+    A response may carry more than one Warning header.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.46
+"WWW-Authenticate":
+  type: response
+  desc: |
+    The WWW-Authenticate header field must be included in 401 (Unauthorized)
+    response messages. The field value consists of at least one challenge that
+    indicates the authentication scheme(s) and parameters applicable to the
+    URI.
+  refs:
+    - http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.47
+
+# Common non-standard fields
 
 "X-UA-Compatible":
   type: response
