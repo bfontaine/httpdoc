@@ -33,7 +33,7 @@ func (d Doc) loadSource(filename string, target interface{}) (err error) {
 }
 
 func defaultDocDir() string {
-	gopath := build.Default.GOPATH
+	gopath := strings.SplitN(build.Default.GOPATH, ":", 2)[0]
 
 	return filepath.Join(gopath, "src",
 		"github.com", "bfontaine", "httpdoc", "_docs")
