@@ -4,7 +4,6 @@ import (
 	"go/build"
 	"io/ioutil"
 	"path/filepath"
-	"sort"
 	"strings"
 
 	"github.com/bfontaine/httpdoc/Godeps/_workspace/src/gopkg.in/yaml.v2"
@@ -45,7 +44,7 @@ func init() {
 	DefaultDoc = Doc{RootDir: defaultDocDir()}
 }
 
-var methods = []string{
+var methods = [...]string{
 	"CONNECT",
 	"DELETE",
 	"GET",
@@ -68,9 +67,19 @@ func (d Doc) GetResourceFor(name string) (Resource, error) {
 		return d.GetStatusCode(name)
 	}
 
-	if sort.SearchStrings(methods, strings.ToUpper(name)) < len(methods) {
-		return d.GetMethod(name)
+	name = strings.ToUpper(name)
+
+	for i := 0; i < len(methods); i++ {
+		if methods[i] == name {
+			return d.GetMethod(name)
+		}
 	}
 
-	return d.GetHeader(name)
+	r, err := d.GetHeader(name)
+
+	if err == ErrUnknownHeader {
+		err = ErrUnknownResource
+	}
+
+	return r, err
 }

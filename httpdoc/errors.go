@@ -16,5 +16,5 @@ var (
 	ErrUnknownHeader = errors.New("Unknown header field")
 
 	// ErrUnknownMethod is returned by GetMethod if it can’t find a method
-	ErrUnknownMethod = errors.New("Unknown method field")
+	ErrUnknownMethod = errors.New("Unknown method")
 )
