@@ -69,11 +69,11 @@ func (d Doc) GetResourceFor(name string) (Resource, error) {
 		return d.GetStatusCode(name)
 	}
 
-	name = strings.ToUpper(name)
+	uppercaseName := strings.ToUpper(name)
 
 	for i := 0; i < len(methods); i++ {
-		if methods[i] == name {
-			return d.GetMethod(name)
+		if methods[i] == uppercaseName {
+			return d.GetMethod(uppercaseName)
 		}
 	}
 

@@ -1,6 +1,7 @@
 package httpdoc
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/bfontaine/httpdoc/Godeps/_workspace/src/github.com/stretchr/testify/assert"
@@ -39,6 +40,26 @@ func TestDocRecognizeMethod(t *testing.T) {
 	}
 
 	assert.Equal(t, "OPTIONS", s.(Method).Verb)
+}
+
+func TestDocRecognizeAllMethods(t *testing.T) {
+	check := func(name, expected string) {
+		s, err := DefaultDoc.GetResourceFor(name)
+		require.Nil(t, err,
+			fmt.Sprintf("GetResourceFor(%s) shouldn't return an error", name))
+		assert.Equal(t, expected, s.(Method).Verb,
+			fmt.Sprintf("GetResourceFor(%s) should return %s", name, expected))
+	}
+
+	check("connect", "CONNECT")
+	check("delete", "DELETE")
+	check("get", "GET")
+	check("head", "HEAD")
+	check("options", "OPTIONS")
+	check("patch", "PATCH")
+	check("post", "POST")
+	check("put", "PUT")
+	check("trace", "TRACE")
 }
 
 func TestDocRecognizeHeader(t *testing.T) {
