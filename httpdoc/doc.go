@@ -44,12 +44,14 @@ func init() {
 	DefaultDoc = Doc{RootDir: defaultDocDir()}
 }
 
+// This should be kept ordered
 var methods = [...]string{
 	"CONNECT",
 	"DELETE",
 	"GET",
 	"HEAD",
 	"OPTIONS",
+	"PATCH",
 	"POST",
 	"PUT",
 	"TRACE",

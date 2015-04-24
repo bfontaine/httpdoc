@@ -111,3 +111,23 @@
     that can dynamically switch to being a tunnel (e.g. SSL tunneling).
   refs:
     - http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.9
+"PATCH":
+  desc: |
+    The PATCH method requests that a set of changes described in the request
+    entity be applied to the resource identified by the URI. The set of changes
+    is represented in a format called a "patch document" identified by a media
+    type. If the URI does not point to an existing resource, the server may
+    create a new resource, depending on the patch document type, permissions,
+    etc.
+    The difference between the PUT and PATCH methods is reflected in the way
+    the server processes the enclosed entity to modify the resource identified
+    by the URI. In a PUT request, the enclosed entity is considered to be a
+    modified version of the resource stored on the server, and the client is
+    requesting that the stored version be replaced. With PATCH, however, the
+    enclosed entity contains a set of instructions describing how a resource on
+    the server should be modified to produce a new version. The PATCH method
+    affects the resource identified by the URI, and it also may have side
+    effects on other resources; i.e., new resources may be created, or existing
+    ones modified, by the application of a PATCH.
+  refs:
+    - http://tools.ietf.org/html/rfc5789#section-2
