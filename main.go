@@ -17,11 +17,21 @@ func printUsage() {
 func main() {
 	var doc httpdoc.Doc
 
+	var versionFlag bool
+
 	flag.StringVar(&doc.RootDir, "root-dir", "",
 		"Documentation root directory")
+	flag.BoolVar(&versionFlag, "version", false,
+		"Show the current version and exit")
+
 	flag.Parse()
 
 	args := flag.Args()
+
+	if versionFlag {
+		fmt.Println(httpdoc.Version)
+		return
+	}
 
 	if len(args) != 1 {
 		printUsage()

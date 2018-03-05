@@ -36,8 +36,6 @@ fmt.Println(code.PrettyString())
 
 ## Support
 
-This tool is a work in progress.
-
 | Resources                    | Support |
 |------------------------------|:-------:|
 | Standard status codes        | ✔       |
