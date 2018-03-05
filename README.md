@@ -21,6 +21,15 @@ your terminal.
 
 `httpdoc` requires Go 1.2+.
 
+### Using Homebrew
+
+If you use [Homebrew](http://brew.sh) or [Linuxbrew](http://linuxbrew.sh/) you
+can install `httpdoc` with one command:
+
+```
+brew install bfontaine/utils/httpdoc
+```
+
 ## Go API
 
 ```go
